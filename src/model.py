@@ -3,8 +3,8 @@ import torch.nn as nn
 
 class SpatialSpectralHybridViT(nn.Module):
     def __init__(self, in_channels: int = 1, reduced_bands: int = 30, patch_size: int = 9, 
-                 embed_dim: int = 64, num_heads: int = 4, num_transformer_layers: int = 2, 
-                 num_classes: int = 2):
+                embed_dim: int = 64, num_heads: int = 4, num_transformer_layers: int = 2, 
+                num_classes: int = 2):
         super().__init__()
         
         # 3D-CNN Block for capturing fine-grained spatial-spectral gradient shifts
