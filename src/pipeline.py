@@ -50,6 +50,7 @@ class HyperspectralCubeProcessor:
         self.is_fitted = True
         return reduced.reshape(h, w, self.n_components)
 
+
     @staticmethod
     def extract_patches(cube: np.ndarray, patch_size: int = 9, stride: int = 5) -> Generator[Tuple[int, int, np.ndarray], None, None]:
         """Extracts 3D sliding patches (Patch_H, Patch_W, Components) for inference."""
