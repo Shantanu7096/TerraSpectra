@@ -51,4 +51,14 @@ class HyperspectralCubeProcessor:
         return reduced.reshape(h, w, self.n_components)
 
     @staticmethod
-    
+    def extract_patches(cube: np.ndarray, patch_size: int = 9, stride: int = 5) -> Generator[Tuple[int, int, np.ndarray], None, None]:
+        """Extracts 3D sliding patches (Patch_H, Patch_W, Components) for inference."""
+        h, w, c = cube.shape
+        pad_h = (patch_size - (h % patch_size)) % patch_size
+        pad_w = (patch_size - (w % patch_size)) % patch_size
+        padded = np.pad(cube, ((0, pad_h), (0, pad_w), (0, 0)), mode="reflect")
+
+        for r in range(0, h, stride):
+            for col in range(0, w, stride):
+                patch = padded[r:r + patch_size, col:col + patch_size, :]
+                yield r, col, patch
